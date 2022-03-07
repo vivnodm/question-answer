@@ -1,6 +1,18 @@
 const category = document.getElementById('categoryInput');
 const addButton = document.getElementById('addButton');
 
+const getAuth = () => {
+    if (localStorage) {
+        if (localStorage.getItem('token')) {
+
+        }
+        return 'Bearer ' + localStorage.getItem('token').toString();
+    }
+    else {
+        return 'Bearer ' + " "
+    }
+}
+
 addButton.addEventListener('click', (e) => {
     e.preventDefault();
     if(category.value===''){
@@ -10,7 +22,7 @@ addButton.addEventListener('click', (e) => {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + (localStorage?.getItem('token')!==undefined)?localStorage.getItem('token').toString():" "
+            'Authorization': getAuth()
         },
         body: JSON.stringify({ category:category.value })
     }).then((response) => {

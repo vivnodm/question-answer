@@ -2,7 +2,17 @@ let cnt = 0;
 let questions = [];
 const category = document.getElementById('category');
 const question = document.getElementById('question')
-const answer = document.getElementById('answer')
+const getAuth = () => {
+    if (localStorage) {
+        if (localStorage.getItem('token')) {
+
+        }
+        return 'Bearer ' + localStorage.getItem('token').toString();
+    }
+    else {
+        return 'Bearer ' + " "
+    }
+}
 
 document.getElementById('answerForm').addEventListener('submit', (e) => {
     e.preventDefault()
@@ -19,7 +29,7 @@ document.getElementById('submit').addEventListener('click', (e) => {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + (localStorage?.getItem('token') !== undefined) ? localStorage.getItem('token').toString() : " "
+                'Authorization': getAuth()
             },
             body: JSON.stringify({ user_id: JSON.parse(localStorage.getItem('user'))._id, question_id: ques._id, answer: ques.answerValue })
         }).then((response) => {
@@ -42,7 +52,7 @@ document.getElementById('submit').addEventListener('click', (e) => {
 
 fetch('/questions', {
     headers: {
-        'Authorization': 'Bearer ' + (localStorage?.getItem('token') !== undefined) ? localStorage.getItem('token').toString() : " "
+        'Authorization': getAuth()
     }
 }).then((response) => {
     console.log(response);

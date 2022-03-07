@@ -3,6 +3,17 @@ const category = document.getElementById('category');
 const question = document.getElementById('question');
 let answerType = 'number';
 
+const getAuth = () => {
+    if (localStorage) {
+        if (localStorage.getItem('token')) {
+
+        }
+        return 'Bearer ' + localStorage.getItem('token').toString();
+    }
+    else {
+        return 'Bearer ' + " "
+    }
+}
 
 document.getElementById('answerType').addEventListener('change', (e) => {
     console.log(e.target.value)
@@ -19,7 +30,7 @@ questionform.addEventListener('submit', (e) => {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + (localStorage?.getItem('token')!==undefined)?localStorage.getItem('token').toString():" "
+            'Authorization': getAuth()
         },
         body: JSON.stringify({ category_id: category.value, question: question.value, answerType: answerType })
     }).then((response) => {
