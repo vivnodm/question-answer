@@ -2,6 +2,12 @@ const loginform = document.getElementById('loginform');
 const emailfield = document.getElementById('InputEmail');
 const passwordfield = document.getElementById('InputPassword');
 
+if(localStorage){
+    if(localStorage.getItem('token')){
+        document.location.href='/home'
+    }
+}
+
 loginform.addEventListener('submit', (e) => {
     e.preventDefault();
     fetch('/user/login', {

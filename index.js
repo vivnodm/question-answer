@@ -21,15 +21,13 @@ app.use(express.static(path.join(__dirname,'./public')));
 app.set('view engine', 'ejs');
 
 app.get('/',(req,res)=>{
+    res.render('login');
+})
+
+app.get('/home',(req,res)=>{
     res.render('home');
 })
 
-app.get('/login',(req,res)=>{
-    res.render('login');
-})
-app.get('/register',(req,res)=>{
-    res.render('register');
-})
 app.get('/category',(req,res)=>{
     res.render('category');
 })
@@ -42,16 +40,16 @@ app.get('/questionnaire',(req,res)=>{
     res.render('questionnaire');
 })
 
-app.post('/user/register', async (req, res) => {
-    const user = new User(req.body);
-    try { 
-        await user.save(); 
-        const token = await user.generateAuthToken();
-        res.status(201).send({ user, token });
-    }catch(e){
-        res.status(400).send(e);
-    }
-})
+// app.post('/user/register', async (req, res) => {
+//     const user = new User(req.body);
+//     try { 
+//         await user.save(); 
+//         const token = await user.generateAuthToken();
+//         res.status(201).send({ user, token });
+//     }catch(e){
+//         res.status(400).send(e);
+//     }
+// })
 
 app.post('/addcategory',auth, async (req, res) => {
     const category = new Category(req.body);

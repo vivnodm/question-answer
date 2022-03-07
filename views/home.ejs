@@ -3,43 +3,6 @@
 
 <head>
     <title>HOME</title>
-</head>
-
-<body>
-    <div class="container justify-content-center">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <h1 class="display-1">Home</h1>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="/login">LOGIN</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/category">Add category</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/addquestion">ADD Question</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/questionnaire">Answer Questionnaire</a>
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-primary"  style="margin: 10px" id="logout">Logout</button>
-            </li>
-
-        </ul>
-    </div>
-
-    <script>
-        document.getElementById('logout').addEventListener('click',()=>{
-            localStorage.clear();
-            alert("Logged out!!!");
-        })
-    </script>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -47,6 +10,46 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container justify-content-center">
+        <nav class="navbar navbar-light bg-light">
+            <div style="display: flex; justify-content: space-between;">
+                <h1 class="display-1">Question and Answer</h1>
+                <button id="logout" class="btn btn-primary" style="height: 50px;">Logout</button>
+            </div>
+
+        </nav>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="col-4">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                            role="tab" href="/category">Add category</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                            role="tab" href="/addquestion">Add Question</a>
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+                            role="tab" href="/questionnaire">Answer Questionnaire</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        if (!localStorage.getItem('token')) {
+            document.location.href = '/'
+        }
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.clear();
+            document.location.href = '/'
+        })
+    </script>
+
+
 </body>
 
 </html>
