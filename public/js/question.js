@@ -19,7 +19,7 @@ document.getElementById('submit').addEventListener('click', (e) => {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + (localStorage.getItem('token') !== undefined) ? localStorage.getItem('token').toString() : " "
+                'Authorization': 'Bearer ' + (localStorage?.getItem('token') !== undefined) ? localStorage.getItem('token').toString() : " "
             },
             body: JSON.stringify({ user_id: JSON.parse(localStorage.getItem('user'))._id, question_id: ques._id, answer: ques.answerValue })
         }).then((response) => {
@@ -42,7 +42,7 @@ document.getElementById('submit').addEventListener('click', (e) => {
 
 fetch('/questions', {
     headers: {
-        'Authorization': 'Bearer ' + (localStorage.getItem('token') !== undefined) ? localStorage.getItem('token').toString() : " "
+        'Authorization': 'Bearer ' + (localStorage?.getItem('token') !== undefined) ? localStorage.getItem('token').toString() : " "
     }
 }).then((response) => {
     console.log(response);

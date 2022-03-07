@@ -10,7 +10,7 @@ addButton.addEventListener('click', (e) => {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + (localStorage.getItem('token')!==undefined)?localStorage.getItem('token').toString():" "
+            'Authorization': 'Bearer ' + (localStorage?.getItem('token')!==undefined)?localStorage.getItem('token').toString():" "
         },
         body: JSON.stringify({ category:category.value })
     }).then((response) => {

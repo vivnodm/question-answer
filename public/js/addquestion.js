@@ -19,7 +19,7 @@ questionform.addEventListener('submit', (e) => {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + (localStorage.getItem('token')!==undefined)?localStorage.getItem('token').toString():" "
+            'Authorization': 'Bearer ' + (localStorage?.getItem('token')!==undefined)?localStorage.getItem('token').toString():" "
         },
         body: JSON.stringify({ category_id: category.value, question: question.value, answerType: answerType })
     }).then((response) => {
