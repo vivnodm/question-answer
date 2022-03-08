@@ -40,16 +40,31 @@ app.get('/questionnaire',(req,res)=>{
     res.render('questionnaire');
 })
 
-// app.post('/user/register', async (req, res) => {
-//     const user = new User(req.body);
-//     try { 
-//         await user.save(); 
-//         const token = await user.generateAuthToken();
-//         res.status(201).send({ user, token });
-//     }catch(e){
-//         res.status(400).send(e);
-//     }
-// })
+app.get('/register', (req,res) => {
+    res.render('register')
+})
+
+app.get('/showAnswers', async (req,res) => {
+    const user = await User.findOne({})
+    const answers = await Answer.find({user_id: user._id});
+    const ans = []
+    for(let i=0;i<answers.length;i++){
+        const ques = await Question.findOne({_id: answers[i].question_id})    
+        ans.push({question : ques.question, answer: answers[i].answer})
+    }
+    res.render('showAnswers',{ans})
+})
+
+app.post('/user/register', async (req, res) => {
+    const user = new User(req.body);
+    try { 
+        await user.save(); 
+        const token = await user.generateAuthToken();
+        res.status(201).send({ user, token });
+    }catch(e){
+        res.status(400).send(e);
+    }
+})
 
 app.post('/addcategory',auth, async (req, res) => {
     const category = new Category(req.body);
