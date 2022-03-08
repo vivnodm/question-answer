@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
         minlength: 7,
         trim: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     tokens: [{
         token: {
             type: String,
@@ -31,17 +35,17 @@ const userSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-userSchema.virtual('question', {
-    ref: 'Question',
-    localField: '_id',
-    foreignField: 'question'
-})
+// userSchema.virtual('question', {
+//     ref: 'Question',
+//     localField: '_id',
+//     foreignField: 'question'
+// })
 
-userSchema.virtual('answer', {
-    ref: 'Answer',
-    localField: '_id',
-    foreignField: 'answer'
-})
+// userSchema.virtual('answer', {
+//     ref: 'Answer',
+//     localField: '_id',
+//     foreignField: 'answer'
+// })
 
 userSchema.methods.toJSON = function () {
     const user = this;

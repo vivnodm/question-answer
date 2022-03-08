@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true
 })
 
+
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname,'./public')));
@@ -21,11 +22,18 @@ app.use(express.static(path.join(__dirname,'./public')));
 app.set('view engine', 'ejs');
 
 app.get('/',(req,res)=>{
-    res.render('login');
+    res.render('index');
 })
 
-app.get('/home',(req,res)=>{
-    res.render('home');
+app.get('/home', async (req,res)=>{
+    //get the isadmin property from user
+    const user = await User.findOne({})
+    // const user = localStorage.getItem(user);
+    res.render('home', {user});
+})
+
+app.get('/login', (req,res) => {
+    res.render('login')
 })
 
 app.get('/category',(req,res)=>{
@@ -50,7 +58,8 @@ app.get('/showAnswers', async (req,res) => {
     const ans = []
     for(let i=0;i<answers.length;i++){
         const ques = await Question.findOne({_id: answers[i].question_id})    
-        ans.push({question : ques.question, answer: answers[i].answer})
+        ans.push({name:user.name, question : ques.question, answer: answers[i].answer, createdAt: answers[i].createdAt})
+        console.log(answers[i].createdAt)
     }
     res.render('showAnswers',{ans})
 })

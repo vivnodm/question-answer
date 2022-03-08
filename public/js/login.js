@@ -22,7 +22,7 @@ loginform.addEventListener('submit', (e) => {
             response.json().then((data) => {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
-                document.location.href='/';
+                document.location.href='/home';
             })
         }
         else{
