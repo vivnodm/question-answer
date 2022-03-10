@@ -7,7 +7,7 @@ const Category = require('./models/category')
 const auth = require('./middleware/auth');
 const path= require('path');
 const mongoose = require('mongoose')
-
+const cors= require('cors');
 const app = express();
 
 mongoose.connect(process.env.MONGODB_URL, {
@@ -16,6 +16,8 @@ mongoose.connect(process.env.MONGODB_URL, {
 
 
 app.use(express.json());
+
+app.use(cors())
 
 app.use(express.static(path.join(__dirname,'./public')));
 
@@ -43,6 +45,12 @@ app.get('/addquestion',async (req,res)=>{
     const categories = await Category.find();
     res.render('addquestion',{categories});
 })
+
+app.get('/qa/getcategories',async (req,res)=>{
+    const categories = await Category.find();
+    res.send({categories});
+})
+
 
 app.get('/questionnaire',(req,res)=>{
     res.render('questionnaire');
@@ -103,14 +111,14 @@ app.get('/getCategory/:id',async (req,res)=>{
     })
 })
 
-app.get('/questions',auth, async (req,res)=>{
+app.get('/qa/getquestions',auth, async (req,res)=>{
     const questions= await Question.find();
     res.status(200).send({
             questions
     })
 })
 
-app.post('/question',auth, async (req, res) => {
+app.post('/qa/postquestion',auth, async (req, res) => {
     const question = new Question(req.body);
     try {
         await question.save();
