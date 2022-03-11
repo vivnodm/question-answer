@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 export default function AddQuestion() {
 
@@ -54,7 +54,7 @@ export default function AddQuestion() {
         })
         if (response.status === 201) {
             alert("Question Added");
-            return <Redirect to='/home'/>
+            return <Navigate to='/home'/>
         }
         else {
             alert('Error: adding question');

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 export default function ShowAnswers() {
 
     const [ans, setAns] = useState();
@@ -24,7 +24,7 @@ export default function ShowAnswers() {
             }
             else {
                 alert("error: fetching answers");
-                return <Redirect to= '/home'/>
+                return <Navigate to= '/home'/>
             }
         }
         requestAnswers();

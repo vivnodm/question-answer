@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 const Home = () => {
     // if (!localStorage.getItem('token')) {
     //     document.location.href = '/'
