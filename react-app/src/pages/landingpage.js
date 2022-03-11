@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Landingpage = () => {
     return (
@@ -12,10 +13,10 @@ const Landingpage = () => {
                 <div class="col-md-8">
                     <div class="col-4">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action " id="list-home-list"
-                                data-toggle="list" role="tab" href="/login">Login to Q/A</a>
-                            <a class="list-group-item list-group-item-action " id="list-home-list"
-                                data-toggle="list" role="tab" href="/register">Register to Q/A</a>
+                            <Link class="list-group-item list-group-item-action " id="list-home-list"
+                                data-toggle="list" role="tab" to="/login">Login to Q/A</Link>
+                            <Link class="list-group-item list-group-item-action " id="list-home-list"
+                                data-toggle="list" role="tab" to="/register">Register to Q/A</Link>
                             <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
                                 role="tab" href="https://vinod-chat-app.herokuapp.com/">Chat</a>
                         </div>
