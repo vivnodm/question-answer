@@ -1,18 +1,19 @@
-import { useState } from "react";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    const navigate= useNavigate();
+    const navigate = useNavigate();
 
-    if (localStorage) {
-        if (localStorage.getItem('token')) {
-            navigate('/home');
+    useEffect(() => {
+        if (localStorage) {
+            if (localStorage.getItem('token')) {
+                navigate('/home');
+            }
         }
-    }
-
+    }, [])
     const loginHandler = (e) => {
         e.preventDefault();
         fetch('/user/login', {
@@ -38,7 +39,7 @@ const Login = () => {
     }
 
     return (
-        <div class="container" style={{marginTop:"15%",width:"30%"}}>
+        <div class="container" style={{ marginTop: "15%", width: "30%" }}>
             <div className="row">
                 <form id="loginform">
                     <h2 align="center">Login</h2>
