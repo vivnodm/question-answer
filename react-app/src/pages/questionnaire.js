@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 export default function Questionnaire() {
 
@@ -108,11 +108,11 @@ export default function Questionnaire() {
                 }
                 else {
                     alert('Error: submiting answers');
-                    return <Redirect to='/home'/>
+                    return <Navigate to='/home'/>
                 }
             })
             alert('Answer Submitted');
-            return <Redirect to='/home'/>;
+            return <Navigate to='/home'/>;
         }
         submitQues();
     }
