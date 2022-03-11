@@ -60,16 +60,16 @@ app.get('/register', (req,res) => {
     res.render('register')
 })
 
-app.get('/showAnswers', async (req,res) => {
+app.get('/qa/showAnswers', async (req,res) => {
     const user = await User.findOne({})
     const answers = await Answer.find({user_id: user._id});
     const ans = []
     for(let i=0;i<answers.length;i++){
         const ques = await Question.findOne({_id: answers[i].question_id})    
-        ans.push({name:user.name, question : ques.question, answer: answers[i].answer, createdAt: answers[i].createdAt})
+        ans.push({name:user.name, question : ques?.question, answer: answers[i].answer, createdAt: answers[i].createdAt})
         console.log(answers[i].createdAt)
     }
-    res.render('showAnswers',{ans})
+    res.send({ans})
 })
 
 app.post('/user/register', async (req, res) => {
@@ -129,7 +129,8 @@ app.post('/qa/postquestion',auth, async (req, res) => {
     }
 });
 
-app.post('/postanswers',auth, async (req,res)=>{
+app.post('/qa/postanswers',auth, async (req,res)=>{
+    console.log(req.body)
     const answer = new Answer(req.body);
     try {
         await answer.save();

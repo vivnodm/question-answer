@@ -11,7 +11,7 @@ const Category = () => {
         if (category.value === '') {
             return alert('Enter category name');
         }
-        fetch('/addcategory', {
+        fetch('http://localhost:5000/addcategory', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

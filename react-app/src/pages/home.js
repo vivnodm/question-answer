@@ -4,7 +4,7 @@ const Home = () => {
     // if (!localStorage.getItem('token')) {
     //     document.location.href = '/'
     // }
-    const logout= () => {
+    const logout = () => {
         localStorage.clear();
         document.location.href = '/'
     }
@@ -12,9 +12,9 @@ const Home = () => {
     return (
         <div class="container justify-content-center">
             <nav class="navbar navbar-light bg-light">
-                <div style={{display: "flex", justifyContent: "space-between"}}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <h1 class="display-1">Question and Answer</h1>
-                    <button id="logout" class="btn btn-primary" onClick={logout} style={{height: "50px"}}>Logout</button>
+                    <button id="logout" class="btn btn-primary" onClick={logout} style={{ height: "50px" }}>Logout</button>
                 </div>
 
             </nav>
@@ -24,22 +24,22 @@ const Home = () => {
                         {JSON.parse(localStorage.getItem('user'))?.isAdmin &&
                             <div class="list-group" id="list-tab" role="tablist">
                                 <a class="list-group-item list-group-item-action " id="list-home-list"
-                                    data-toggle="list" role="tab" href="/qa/category">Add category</a>
+                                    data-toggle="list" role="tab" href="/category">Add category</a>
                                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                                    role="tab" href="/qa/addquestion">Add Question</a>
+                                    role="tab" href="/addquestion">Add Question</a>
                                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                                    role="tab" href="/qa/showAnswers">Show Answers</a>
+                                    role="tab" href="/showAnswers">Show Answers</a>
                             </div>}
                         {!JSON.parse(localStorage?.getItem('user'))?.isAdmin &&
                             <div class="list-group" id="list-tab" role="tablist">
                                 <a class="list-group-item list-group-item-action " id="list-home-list"
-                                    data-toggle="list" role="tab" href="/qa/category">Add category</a>
+                                    data-toggle="list" role="tab" href="/category">Add category</a>
                                 <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                                    role="tab" href="/qa/addquestion">Add Question</a>
+                                    role="tab" href="/addquestion">Add Question</a>
                                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                                    role="tab" href="/qa/showAnswers">Show Answers</a>
+                                    role="tab" href="/showAnswers">Show Answers</a>
                                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                                    role="tab" href="/qa/questionnaire">Answer Questionnaire</a>
+                                    role="tab" href="/questionnaire">Answer Questionnaire</a>
                             </div>
                         }
                     </div>

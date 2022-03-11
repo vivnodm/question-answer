@@ -11,21 +11,27 @@ export default function AddQuestion() {
 
     useEffect(() => {
         const getcategories = async () => {
-            const response = await fetch('/qa/getcategories', {
-                method: 'get',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': getAuth()
+            try {
+                const response = await fetch('http://localhost:5000/qa/getcategories', {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': getAuth()
+                    }
+                });
+                if (response.status === 200) {
+                    console.log(response)
+                    const data = await response.json();
+                    setCategories(data.categories)
+                    setCategory(data.categories[0]);
+                    setDone(true);
                 }
-            });
-            if (response.status === 200) {
-                const data = await response.json();
-                setCategories(data.categories)
-                setCategory(data.categories[0]);
-                setDone(true);
+                else {
+                    alert('Error:getting categories');
+                }
             }
-            else {
-                alert('Error:getting categories');
+            catch (e) {
+                console.log(e)
             }
         }
         getcategories();
