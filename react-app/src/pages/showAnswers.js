@@ -10,7 +10,7 @@ export default function ShowAnswers() {
     useEffect(() => {
         console.log('hehe')
         const requestAnswers = async () => {
-            const response = await fetch('http://localhost:5000/qa/showAnswers', {
+            const response = await fetch('/qa/showAnswers', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': getAuth()

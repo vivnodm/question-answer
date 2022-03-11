@@ -11,7 +11,7 @@ export default function Questionnaire() {
     const [loading, setLoading] = useState(false);
 
     const getCategory = async (category_id) => {
-        const response = await fetch(`http://localhost:5000/getCategory/${category_id}`);
+        const response = await fetch(`/getCategory/${category_id}`);
         const data = await response.json();
         setCategory(data.category);
         setLoading(true);
@@ -21,7 +21,7 @@ export default function Questionnaire() {
 
         const getQuestions = async () => {
 
-            const response = await fetch('http://localhost:5000/qa/getquestions', {
+            const response = await fetch('/qa/getquestions', {
                 headers: {
                     'Authorization': getAuth()
                 }
@@ -93,7 +93,7 @@ export default function Questionnaire() {
             }
             questions[pointer].answerValue = answer;
             questions.map(async (ques) => {
-                const response = await fetch('http://localhost:5000/qa/postanswers', {
+                const response = await fetch('/qa/postanswers', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',

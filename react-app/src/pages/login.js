@@ -13,7 +13,7 @@ const Login = () => {
 
     const loginHandler = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/user/login', {
+        fetch('/user/login', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

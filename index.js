@@ -5,7 +5,8 @@ const Answer = require('./models/Answer');
 const User = require('./models/User');
 const Category = require('./models/category')
 const auth = require('./middleware/auth');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const path = require('path');
 const cors = require('cors');
 const app = express();
 
@@ -18,6 +19,10 @@ app.use(express.json());
 app.use(cors());
 
 app.use(express.static(path.resolve(__dirname, "./react-app/build")));
+
+app.post('/',(req,res)=>{
+    res.send(path.join(__dirname,'./react-app/build','index.js'))
+})
 
 app.post('/user/login', async (req, res) => {
     try {
