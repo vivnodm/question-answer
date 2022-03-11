@@ -1,13 +1,15 @@
 import React from "react";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 const Home = () => {
     // if (!localStorage.getItem('token')) {
     //     document.location.href = '/'
     // }
     const logout = () => {
         localStorage.clear();
-        document.location.href = '/'
+        navigate('/');
     }
+
+    const navigate = useNavigate();
 
     return (
         <div class="container justify-content-center">

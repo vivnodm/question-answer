@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 const Register = () => {
 
@@ -7,6 +7,7 @@ const Register = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [isAdmin, setIsAdmin] = useState(false);
+    const navigate= useNavigate();
 
     const registerHandler = (e) => {
         e.preventDefault();
@@ -23,7 +24,7 @@ const Register = () => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     alert("Registration Successfull");
-                    document.location.href = '/';
+                    navigate('/');
                 })
             }
             else {

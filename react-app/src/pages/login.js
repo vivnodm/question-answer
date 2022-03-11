@@ -1,13 +1,15 @@
 import { useState } from "react";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
+    const navigate= useNavigate();
+
     if (localStorage) {
         if (localStorage.getItem('token')) {
-           return <Navigate to='/home'/>
+            navigate('/home');
         }
     }
 
@@ -25,7 +27,7 @@ const Login = () => {
                 response.json().then((data) => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    return <Navigate to='/home'/>
+                    navigate('/home');
                 })
             }
             else {

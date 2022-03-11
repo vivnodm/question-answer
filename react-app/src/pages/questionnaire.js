@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 export default function Questionnaire() {
 
@@ -8,7 +8,7 @@ export default function Questionnaire() {
     let [answer, setAnswer] = useState('');
     let [pointer, setPointer] = useState(0);
     let [category, setCategory] = useState('')
-
+    const navigate= useNavigate();
     const [loading, setLoading] = useState(false);
 
     const getCategory = async (category_id) => {
@@ -108,11 +108,11 @@ export default function Questionnaire() {
                 }
                 else {
                     alert('Error: submiting answers');
-                    return <Navigate to='/home'/>
+                    return navigate('/home');
                 }
             })
             alert('Answer Submitted');
-            return <Navigate to='/home'/>;
+            return navigate('/home');
         }
         submitQues();
     }

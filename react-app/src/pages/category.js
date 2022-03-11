@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import getAuth from "../config/auth";
 
 const Category = () => {
 
     const [category, setCategory] = useState();
+    const navigate= useNavigate();
 
     const categoryHandler = (e) => {
         e.preventDefault();
@@ -22,7 +23,7 @@ const Category = () => {
             console.log(response);
             if (response.status === 201) {
                 alert('category added');
-                return <Navigate to='/home'/>
+                navigate('/home');
             }
             else {
                 alert('error')

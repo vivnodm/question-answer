@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 export default function AddQuestion() {
 
@@ -9,6 +9,8 @@ export default function AddQuestion() {
     const [question, setQuestion] = useState();
     const [answerType, setAnswerType] = useState('number');
     const [done, setDone] = useState(false);
+
+    const navigate= useNavigate();
 
     useEffect(() => {
         const getcategories = async () => {
@@ -54,7 +56,7 @@ export default function AddQuestion() {
         })
         if (response.status === 201) {
             alert("Question Added");
-            return <Navigate to='/home'/>
+            navigate('/home');
         }
         else {
             alert('Error: adding question');
