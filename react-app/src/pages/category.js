@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {Link, Redirect} from "react-router-dom";
 import getAuth from "../config/auth";
 
 const Category = () => {
@@ -22,7 +22,7 @@ const Category = () => {
             console.log(response);
             if (response.status === 201) {
                 alert('category added');
-                document.location.href = '/home'
+                return <Redirect to='/home'/>
             }
             else {
                 alert('error')

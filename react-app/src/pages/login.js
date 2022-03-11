@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import {Link, Redirect} from "react-router-dom";
 const Login = () => {
 
     const [email, setEmail] = useState();
@@ -7,7 +7,7 @@ const Login = () => {
 
     if (localStorage) {
         if (localStorage.getItem('token')) {
-            document.location.href = '/home'
+           return <Redirect to='/home'/>
         }
     }
 
@@ -25,7 +25,7 @@ const Login = () => {
                 response.json().then((data) => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    document.location.href = '/home';
+                    return <Redirect to='/home'/>
                 })
             }
             else {

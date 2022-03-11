@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
+import {Link, Redirect} from "react-router-dom";
 
 export default function Questionnaire() {
 
@@ -107,11 +108,11 @@ export default function Questionnaire() {
                 }
                 else {
                     alert('Error: submiting answers');
-                    return document.location.href = '/home';
+                    return <Redirect to='/home'/>
                 }
             })
             alert('Answer Submitted');
-            document.location.href = '/home'
+            return <Redirect to='/home'/>;
         }
         submitQues();
     }

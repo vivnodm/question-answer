@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
+import {Link, Redirect} from "react-router-dom";
 
 export default function AddQuestion() {
 
@@ -53,7 +54,7 @@ export default function AddQuestion() {
         })
         if (response.status === 201) {
             alert("Question Added");
-            document.location.href = '/home';
+            return <Redirect to='/home'/>
         }
         else {
             alert('Error: adding question');
