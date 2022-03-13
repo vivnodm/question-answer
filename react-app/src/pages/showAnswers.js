@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 export default function ShowAnswers() {
 
     const [ans, setAns] = useState();
-
+    const navigate= useNavigate();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         console.log('hehe')
         const requestAnswers = async () => {
-            const response = await fetch('http://localhost:5000/qa/showAnswers', {
+            const response = await fetch('/qa/showAnswers', {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': getAuth()
@@ -24,7 +25,7 @@ export default function ShowAnswers() {
             }
             else {
                 alert("error: fetching answers");
-                document.location.href = '/home';
+                navigate('/home');
             }
         }
         requestAnswers();

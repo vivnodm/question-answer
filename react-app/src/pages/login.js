@@ -1,19 +1,22 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-    if (localStorage) {
-        if (localStorage.getItem('token')) {
-            document.location.href = '/home'
-        }
-    }
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        if (localStorage) {
+            if (localStorage.getItem('token')) {
+                navigate('/home');
+            }
+        }
+    }, [])
     const loginHandler = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/user/login', {
+        fetch('/user/login', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +28,7 @@ const Login = () => {
                 response.json().then((data) => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    document.location.href = '/home';
+                    navigate('/home');
                 })
             }
             else {
@@ -36,7 +39,7 @@ const Login = () => {
     }
 
     return (
-        <div class="container" style={{marginTop:"15%",width:"30%"}}>
+        <div class="container" style={{ marginTop: "15%", width: "30%" }}>
             <div className="row">
                 <form id="loginform">
                     <h2 align="center">Login</h2>

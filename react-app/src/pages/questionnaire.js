@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 export default function Questionnaire() {
 
@@ -7,11 +8,11 @@ export default function Questionnaire() {
     let [answer, setAnswer] = useState('');
     let [pointer, setPointer] = useState(0);
     let [category, setCategory] = useState('')
-
+    const navigate= useNavigate();
     const [loading, setLoading] = useState(false);
 
     const getCategory = async (category_id) => {
-        const response = await fetch(`http://localhost:5000/getCategory/${category_id}`);
+        const response = await fetch(`/getCategory/${category_id}`);
         const data = await response.json();
         setCategory(data.category);
         setLoading(true);
@@ -21,7 +22,7 @@ export default function Questionnaire() {
 
         const getQuestions = async () => {
 
-            const response = await fetch('http://localhost:5000/qa/getquestions', {
+            const response = await fetch('/qa/getquestions', {
                 headers: {
                     'Authorization': getAuth()
                 }
@@ -93,7 +94,7 @@ export default function Questionnaire() {
             }
             questions[pointer].answerValue = answer;
             questions.map(async (ques) => {
-                const response = await fetch('http://localhost:5000/qa/postanswers', {
+                const response = await fetch('/qa/postanswers', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json',
@@ -107,11 +108,11 @@ export default function Questionnaire() {
                 }
                 else {
                     alert('Error: submiting answers');
-                    return document.location.href = '/home';
+                    return navigate('/home');
                 }
             })
             alert('Answer Submitted');
-            document.location.href = '/home'
+            return navigate('/home');
         }
         submitQues();
     }

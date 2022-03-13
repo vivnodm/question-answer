@@ -15,10 +15,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landingpage />} />
-        <Route exact path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route exact path="home" element={<Home />} />
-        <Route exact path="category" element={<Category />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route exact path="/category" element={<Category />} />
         <Route exact path="addquestion" element={<AddQuestion />} />
         <Route exact path="/questionnaire" element={<Questionnaire />} />
         <Route exact path="/showAnswers" element={<ShowAnswers />} />

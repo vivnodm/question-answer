@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import getAuth from "../config/auth";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
 export default function AddQuestion() {
 
@@ -9,10 +10,12 @@ export default function AddQuestion() {
     const [answerType, setAnswerType] = useState('number');
     const [done, setDone] = useState(false);
 
+    const navigate= useNavigate();
+
     useEffect(() => {
         const getcategories = async () => {
             try {
-                const response = await fetch('http://localhost:5000/qa/getcategories', {
+                const response = await fetch('/qa/getcategories', {
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,7 +46,7 @@ export default function AddQuestion() {
         if (question === '') {
             return alert("Enter your question")
         }
-        const response = await fetch('http://localhost:5000/qa/postquestion', {
+        const response = await fetch('/qa/postquestion', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +56,7 @@ export default function AddQuestion() {
         })
         if (response.status === 201) {
             alert("Question Added");
-            document.location.href = '/home';
+            navigate('/home');
         }
         else {
             alert('Error: adding question');
