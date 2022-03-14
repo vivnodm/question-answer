@@ -42,8 +42,6 @@ const Home = () => {
                                     role="tab" href="/showAnswers">Show Answers</a>
                                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
                                     role="tab" href="/questionnaire">Answer Questionnaire</a>
-                                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                                    role="tab" href="https://vl-strapi-project.herokuapp.com/admin/auth/login">Strapi</a>
                             </div>
                         }
                     </div>

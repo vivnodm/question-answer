@@ -9,6 +9,7 @@ import Category from './pages/category';
 import AddQuestion from './pages/addQuestion';
 import Questionnaire from './pages/questionnaire';
 import ShowAnswers from './pages/showAnswers';
+import Postman from './pages/postman';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="addquestion" element={<AddQuestion />} />
         <Route exact path="/questionnaire" element={<Questionnaire />} />
         <Route exact path="/showAnswers" element={<ShowAnswers />} />
+        <Route exact path="/postman" element={<Postman />} />
 
       </Routes>
     </BrowserRouter>

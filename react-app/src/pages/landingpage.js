@@ -9,7 +9,7 @@ const Landingpage = () => {
                     <h1 class="display-1">Landing Page</h1>
                 </div>
             </nav>
-            
+
             <div class="row">
                 <div class="col-md-8">
                     <div class="col-4">
@@ -22,6 +22,8 @@ const Landingpage = () => {
                                 role="tab" href="https://vinod-chat-app.herokuapp.com/">Chat</a>
                             <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
                                 role="tab" href="https://vl-strapi-project.herokuapp.com/admin/auth/login">Strapi CMS</a>
+                            <Link class="list-group-item list-group-item-action " id="list-home-list"
+                                data-toggle="list" role="tab" to="/postman">Test CMS</Link>
                         </div>
                     </div>
                 </div>
