@@ -25,7 +25,7 @@ const Landingpage = () => {
                             <Link class="list-group-item list-group-item-action " id="list-home-list"
                                 data-toggle="list" role="tab" to="/postman">Test CMS</Link>
                             <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                                role="tab" href="/api-docs">Swagger API</a>
+                                role="tab" href="https://vl-question-answer.herokuapp.com/api-docs">Swagger API</a>
                         </div>
                     </div>
                 </div>

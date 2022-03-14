@@ -6,9 +6,9 @@
         "title": "Question-Answer API"
     },
     "schemes": [
-        "http"
+        "http","https"
     ],
-    "host": "https://vl-question-answer.herokuapp.com",
+    "host": "vl-question-answer.herokuapp.com",
     "basePath": "/",
     "paths": {
         "/user/login": {
