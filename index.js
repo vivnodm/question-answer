@@ -9,6 +9,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+
+const swaggerDocument = require('./swagger.json');
 
 mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true
@@ -20,8 +23,10 @@ app.use(cors());
 
 app.use(express.static(path.resolve(__dirname, "./react-app/build")));
 
-app.get('/',(req,res)=>{
-    res.send(path.join(__dirname,'./react-app/build','index.js'))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get('/', (req, res) => {
+    res.send(path.join(__dirname, './react-app/build', 'index.js'))
 })
 
 app.post('/user/login', async (req, res) => {
@@ -30,7 +35,6 @@ app.post('/user/login', async (req, res) => {
         const token = await user.generateAuthToken();
         res.status(200).send({ user, token });
     } catch (e) {
-        console.log(e)
         res.status(400).send(e);
     }
 });
@@ -88,7 +92,6 @@ app.post('/qa/postquestion', auth, async (req, res) => {
         res.status(404).send();
     }
 });
-
 
 
 app.post('/qa/postanswers', auth, async (req, res) => {
