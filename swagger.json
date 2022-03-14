@@ -1,5 +1,5 @@
 {
-    "swagger": "2.0",
+    "swagger": "2.0.0",
     "info": {
         "description": "Swagger Documentation for vl Api's",
         "version": "1.0.0",
@@ -9,73 +9,215 @@
         "http"
     ],
     "host": "localhost:5000",
-    "basePath": "/api",
+    "basePath": "/",
     "paths": {
         "/user/login": {
             "post": {
                 "summary": "Login to q/a",
                 "description": "Login to q/a",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Login object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/LoginInputs"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "successful login",
-                        "schema": {
-                            "type":"object",
-                            "schema":"#/definitions/UserLogin"
-                        }
+                        "description": "sucessful logging in"
                     },
                     "400": {
-                        "description": "Invalid login details",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
+                        "description": "Invalid login details"
                     }
                 }
             }
         },
         "/user/register": {
             "post": {
-                "summary": "Save the task",
-                "description": "Save the task",
-                "produces": [
-                    "application/json"
-                ],
+                "summary": "Register to q/a",
+                "description": "Register to q/a",
                 "consumes": [
                     "application/json"
                 ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "task object",
+                        "description": "Register object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/RegisterUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "User created"
+                    },
+                    "400": {
+                        "description": "User exists/ Invalid user details"
+                    }
+                }
+            }
+        },
+        "/addcategory": {
+            "post": {
+                "summary": "Add a category to q/a",
+                "description": "add a category to q/a",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task": {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
+                                "category": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "category added"
+                    },
+                    "400": {
+                        "description": "category already exists"
+                    }
+                }
+            }
+        },
+        "/getCategory/{id}": {
+            "get": {
+                "summary": "Get a category by id",
+                "description": "Get a category by id",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "category id that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "category reterived"
+                    },
+                    "400": {
+                        "description": "category does not exists"
+                    }
+                }
+            }
+        },
+        "/qa/getcategories": {
+            "get": {
+                "summary": "Get all categories",
+                "description": "Get all categories",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "categories reterived"
+                    },
+                    "400": {
+                        "description": "error getting categories"
+                    }
+                }
+            }
+        },
+        "/qa/getquestions": {
+            "get": {
+                "summary": "Retrive all questions",
+                "description": "Retrive all questions",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/qa/postquestion": {
+            "post": {
+                "summary": "Add a question",
+                "description": "Add a question",
+                "produces": [
+                    "application/json"
+                ],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "category": {
+                                    "type": "string"
                                 },
-                                "SUM": {
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    {
-                        "in": "input",
-                        "name": "input",
-                        "description": "task object",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "task": {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
+                                "question": {
+                                    "type": "string"
+                                },
+                                "answerType": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -83,49 +225,42 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
+                        "description": "Invalid status value"
                     }
                 }
             }
         },
-        "/todos/{id}": {
-            "put": {
-                "summary": "Update the tasks",
-                "description": "Update the tasks",
+        "/qa/postanswers": {
+            "post": {
+                "summary": "Answer a question",
+                "description": "Answer a question",
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
+                "security": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
-                    },
+                        "Bearer": []
+                    }
+                ],
+                "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "task object",
                         "required": true,
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task": {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
+                                "user_id": {
+                                    "type": "string"
+                                },
+                                "question_id": {
+                                    "type": "string"
+                                },
+                                "answer": {
+                                    "type": "string"
                                 }
                             }
                         }
@@ -133,82 +268,93 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
+                        "description": "Invalid status value"
                     }
                 }
             }
         },
-        "/todo/{id}": {
-            "delete": {
-                "summary": "Delete the task",
-                "description": "Delete the task",
+        "/qa/showAnswers": {
+            "get": {
+                "summary": "Retrieve Answers for answered questions",
+                "description": "Retrieve Answers for answered questions",
                 "produces": [
                     "application/json"
                 ],
-                "parameters": [
+                "security": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
+                        "Bearer": []
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/todosResponse"
-                            }
-                        }
+                        "description": "successful operation"
                     },
                     "400": {
-                        "description": "Invalid status value",
-                        "schema": {
-                            "$ref": "#/definitions/InvalidResponse"
-                        }
+                        "description": "Invalid status value"
                     }
                 }
             }
         }
     },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Enter your bearer token in the format **Bearer &lt;token>**"
+        }
+    },
     "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
         "LoginUser": {
             "type": "object",
             "properties": {
                 "token": {
                     "type": "string"
                 },
-                "user":{
-                    "type":"string"
+                "user": {
+                    "$ref": "#/definitions/User"
                 }
             }
         },
-        "Task": {
+        "LoginInputs": {
             "type": "object",
             "properties": {
-                "task": {
+                "email": {
                     "type": "string"
                 },
-                "assignee": {
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "RegisterUser": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string"
                 },
-                "status": {
+                "email": {
                     "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "isAdmin": {
+                    "type": "boolean"
                 }
             }
         },

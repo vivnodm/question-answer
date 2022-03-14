@@ -30,11 +30,13 @@ app.get('/', (req, res) => {
 })
 
 app.post('/user/login', async (req, res) => {
+    console.log(req.body)
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
         const token = await user.generateAuthToken();
         res.status(200).send({ user, token });
     } catch (e) {
+        console.log(e)
         res.status(400).send(e);
     }
 });
@@ -63,23 +65,37 @@ app.post('/addcategory', auth, async (req, res) => {
 
 
 app.get('/getCategory/:id', async (req, res) => {
-    const category = await Category.findById(req.params.id);
-    res.status(200).send({
-        category: category.category
-    })
+    try {
+        const category = await Category.findById(req.params.id);
+        res.status(200).send({
+            category: category.category
+        })
+    } catch (e) {
+        res.status(400).send(e);
+    }
 })
 
 
 app.get('/qa/getcategories', async (req, res) => {
-    const categories = await Category.find();
-    res.send({ categories });
+    try {
+        const categories = await Category.find();
+        res.send({ categories });
+    }
+    catch (e) {
+        res.status(400).send(e);
+    }
 })
 
 app.get('/qa/getquestions', auth, async (req, res) => {
-    const questions = await Question.find();
-    res.status(200).send({
-        questions
-    })
+    try {
+        const questions = await Question.find();
+        res.status(200).send({
+            questions
+        })
+    } catch (error) {
+        res.status(400).send(error);
+    }
+    
 })
 
 app.post('/qa/postquestion', auth, async (req, res) => {
@@ -112,7 +128,7 @@ app.get('/qa/showAnswers', async (req, res) => {
     for (let i = 0; i < answers.length; i++) {
         const ques = await Question.findOne({ _id: answers[i].question_id })
         ans.push({ name: user.name, question: ques?.question, answer: answers[i].answer, createdAt: answers[i].createdAt })
-        console.log(answers[i].createdAt)
+        //console.log(Date(answers[i].createdAt))
     }
     res.send({ ans })
 })
