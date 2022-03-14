@@ -5,11 +5,6 @@
         "version": "1.0.0",
         "title": "Question-Answer API"
     },
-    "schemes": [
-        "http","https"
-    ],
-    "host": "vl-question-answer.herokuapp.com",
-    "basePath": "/",
     "paths": {
         "/user/login": {
             "post": {
