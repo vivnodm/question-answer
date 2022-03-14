@@ -9,6 +9,7 @@ const Landingpage = () => {
                     <h1 class="display-1">Landing Page</h1>
                 </div>
             </nav>
+            
             <div class="row">
                 <div class="col-md-8">
                     <div class="col-4">

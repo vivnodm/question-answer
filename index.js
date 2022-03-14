@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use(express.static(path.resolve(__dirname, "./react-app/build")));
 
-app.post('/',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send(path.join(__dirname,'./react-app/build','index.js'))
 })
 
